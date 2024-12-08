@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: app-pdf-bot
+  profiles:
+    active: dev
+server:
+  port: 80
+
+telegram:
+  api-url: "https://api.telegram.org"
+  webhook-path: "YOUR_BOT_WEBHOOK"
+  bot-name: "YOUR_BOT_USERNAME"
+  bot-token: "YOUR_BOT_TOKEN"
+  chat-id:
+    log: CHAT_ID_FOR_LOGGING
+    file-store: CHAT_ID_FOR_STORING
+
+
+logging:
+  level:
+    root: warn
+  file:
+    name: app-pdf-bot.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 10
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n"
