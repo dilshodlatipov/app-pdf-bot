@@ -92,14 +92,9 @@ public class AsyncConverterImpl implements AsyncConverter {
 
     @Override
     public void convertTextToPDF(UserEntity user, PDFDocument document) {
-        PDType1Font font = null;
-        InputStream fontInputStream = null;
-        if (Objects.equals(document.getFont(), MessageService.message(user, RestConstants.TEXT_SKIP)))
-            font = new PDType1Font(Standard14Fonts.FontName.TIMES_ROMAN);
-        else
-            fontInputStream = fontService.getFontInputStream(document.getFont());
+        InputStream fontInputStream = fontService.getFontInputStream(document.getFont());
 
-        try (InputStream inputStream = pdfService.createDocument(document.getDocumentText(), font, fontInputStream, RestConstants.FONT_SIZE)) {
+        try (InputStream inputStream = pdfService.createDocument(document.getDocumentText(), fontInputStream, RestConstants.FONT_SIZE)) {
             sendFileTelegram(user, document, inputStream);
 
             document.setStatus(DocumentStatus.PROCESSED);

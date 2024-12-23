@@ -5,6 +5,7 @@ public interface RestConstants {
     long TWENTY_MB = 1024 * 1024 * 20;
     String SUPPORTED_IMAGE_TYPES_REGEX = "^image\\/(png|jpg|jpeg|gif|bmp|tiff|tif)$";
     String PDF_MIME_REGEX = "^application/pdf$";
+    String TIMES_NEW_ROMAN = "timesnewroman";
 
     String USER_CANCEL = "user.cancel";
     String INVALID_INPUT = "invalid.input";

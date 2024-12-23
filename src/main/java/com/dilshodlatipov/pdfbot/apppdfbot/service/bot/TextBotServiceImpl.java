@@ -94,7 +94,9 @@ public class TextBotServiceImpl implements TextBotService {
 
         userService.setStatus(user, BotStatus.WAITING);
 
-        document.setFont(message.getText());
+        if (Objects.equals(message.getText(), MessageService.message(user, RestConstants.TEXT_SKIP)))
+            document.setFont(RestConstants.TIMES_NEW_ROMAN);
+        else document.setFont(message.getText());
         documentRepository.save(document);
 
         asyncConverter.processDocument(Order.builder().documentId(document.getId()).build(), user);

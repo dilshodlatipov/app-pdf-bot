@@ -1,0 +1,64 @@
+@startuml
+
+package "entity.template" {
+    abstract class AbsDateAuditingEntity {
+        - LocalDateTime createdAt
+        - LocalDateTime updatedAt
+        - boolean deleted
+    }
+
+    abstract class AbsAuditingEntity extends AbsDateAuditingEntity {
+        - UUID createdById
+        - UUID updatedById
+    }
+
+    abstract class AbsUUIDEntity extends AbsAuditingEntity {
+        - UUID id
+    }
+}
+
+package "entity" {
+    class UserEntity extends AbsUUIDEntity {
+        - Long telegramId
+        - String firstName
+        - String lastName
+        - String username
+        - String phoneNumber
+        - BotStatus status
+        - Language language
+    }
+
+    class PDFDocument extends AbsUUIDEntity {
+        - String telegramUniqueId
+        - String telegramId
+        - List<Attachment> attachments
+        - DocumentType documentType
+        - String documentText
+        - String font
+        - DocumentStatus status
+    }
+
+    class Attachment extends AbsUUIDEntity {
+        - String originalName
+        - long size
+        - String contentType
+        - String path
+        - String telegramId
+    }
+}
+
+' Enumerations
+enum BotStatus
+enum Language
+enum DocumentType
+enum DocumentStatus
+
+' Relationships
+UserEntity --> BotStatus
+UserEntity --> Language
+PDFDocument --> DocumentType
+PDFDocument --> DocumentStatus
+PDFDocument --> Attachment : "1..*"
+Attachment --> PDFDocument : "Many-to-One"
+
+@enduml

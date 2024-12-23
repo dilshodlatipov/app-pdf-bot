@@ -1,8 +1,6 @@
 package com.dilshodlatipov.pdfbot.apppdfbot.service;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.pdfbox.pdmodel.font.PDFont;
-import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.springframework.stereotype.Service;
 
 import java.io.File;

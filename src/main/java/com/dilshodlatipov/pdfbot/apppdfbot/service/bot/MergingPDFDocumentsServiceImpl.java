@@ -112,7 +112,7 @@ public class MergingPDFDocumentsServiceImpl implements MergingPDFDocumentsServic
         if (Objects.equals(message.getText(), MessageService.message(user, RestConstants.REMOVE_LAST_PDF))) {
             attachmentRepository.deleteLastOne(user.getId());
             List<Attachment> attachments = document.getAttachments();
-            return MessageService.getTextForReply(user, attachments, RestConstants.MERGE_LIMIT);
+            return MessageService.getTextForReply(user, attachments, RestConstants.MERGE_LIST);
         } else if (Objects.equals(message.getText(), MessageService.message(user, RestConstants.MERGE_PDF))) {
             userService.setStatus(user, BotStatus.WAITING);
 

@@ -1,0 +1,63 @@
+@startuml
+start
+
+:User sends a command;
+
+if (/image) then (yes)
+    :User sends images;
+    while (User sends more images?) is (yes)
+        :Add image to list;
+    endwhile
+    if (User sends "remove last") then (yes)
+        :Remove last image;
+    else (no)
+    endif
+    if (User sends "create PDF") then (yes)
+        :Create PDF from images;
+        :Send PDF to user;
+    else (no)
+    endif
+else (no)
+    if (/merge) then (yes)
+        :User sends PDFs;
+        while (User sends more PDFs?) is (yes)
+            :Add PDF to list;
+        endwhile
+        if (User sends "remove last") then (yes)
+            :Remove last PDF;
+        else (no)
+        endif
+        if (User sends "merge PDFs") then (yes)
+            :Merge PDFs into one;
+            :Send merged PDF to user;
+        else (no)
+        endif
+    else (no)
+        if (/text) then (yes)
+            :User sends text;
+            :Bot prompts user to choose a font;
+            :User selects a font;
+            :Create PDF with selected font;
+            :Send PDF to user;
+        else (no)
+            if (/language) then (yes)
+                :Send list of supported languages;
+                :User selects a language;
+                :Change bot interface language;
+            else (no)
+                if (/help) then (yes)
+                    :Send instructions on using the bot;
+                else (no)
+                    if (/cancel) then (yes)
+                        :Cancel current action in progress;
+                    else (no)
+                        :Invalid command;
+                    endif
+                endif
+            endif
+        endif
+    endif
+endif
+
+stop
+@enduml

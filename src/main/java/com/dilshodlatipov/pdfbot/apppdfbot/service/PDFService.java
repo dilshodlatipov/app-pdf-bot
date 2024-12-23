@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface PDFService {
 
-    InputStream createDocument(String text, PDFont font, InputStream fontInputStream, float fontSize);
+    InputStream createDocument(String text, InputStream fontInputStream, float fontSize);
 
     InputStream createDocument(List<InputStream> images);
 

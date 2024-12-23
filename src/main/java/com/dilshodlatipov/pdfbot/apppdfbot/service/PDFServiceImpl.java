@@ -21,7 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PDFServiceImpl implements PDFService {
     @Override
-    public InputStream createDocument(String text, PDFont font, InputStream fontInputStream, float fontSize) {
+    public InputStream createDocument(String text, InputStream fontInputStream, float fontSize) {
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
              PDDocument document = new PDDocument()) {
             PDPage page = new PDPage();
@@ -29,12 +29,8 @@ public class PDFServiceImpl implements PDFService {
 
             try (PDPageContentStream contentStream = new PDPageContentStream(document, page)) {
                 contentStream.beginText();
-                if (font != null)
-                    contentStream.setFont(font, fontSize);
-                else {
-                    PDType0Font loadedFont = PDType0Font.load(document, fontInputStream);
-                    contentStream.setFont(loadedFont, fontSize);
-                }
+                PDType0Font loadedFont = PDType0Font.load(document, fontInputStream);
+                contentStream.setFont(loadedFont, fontSize);
                 contentStream.newLineAtOffset(100, 700);
                 contentStream.showText(text);
                 contentStream.endText();

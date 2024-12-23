@@ -32,27 +32,4 @@ public class PDFServiceBot extends TelegramWebhookBot {
     public BotApiMethod<?> onWebhookUpdateReceived(Update update) {
         return botRouter.onWebhookUpdateReceived(update);
     }
-
-   /* private void createPDFromImage(Long chatId) {
-        try {
-            File file = new File("src/main/resources/data.png");
-            InputStream picture = new FileInputStream(file);
-            InputStream inputStream = pdfService.createDocument(List.of(picture));
-
-            SendDocument build = SendDocument.builder()
-                    .chatId(CHAT_ID)
-                    .document(new InputFile(inputStream, UUID.randomUUID() + ".pdf"))
-                    .build();
-
-            Message message = execute(build);
-            String fileId = message.getDocument().getFileId();
-
-            execute(SendDocument.builder()
-                    .chatId(chatId)
-                    .document(new InputFile(fileId))
-                    .build());
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-    }*/
 }
